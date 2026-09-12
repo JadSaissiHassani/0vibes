@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Customize {{ product.name }} — 0vibe</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: -apple-system, Segoe UI, Roboto, sans-serif;
+            background: #0f0f14;
+            color: #f2f2f5;
+            padding: 2rem;
+        }
+        a.back {
+            color: #6c5ce7;
+            text-decoration: none;
+        }
+        h1 {
+            margin: 1rem 0 1.5rem 0;
+            font-size: 1.6rem;
+        }
+        .layout {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+        #canvas {
+            position: relative;
+            width: 500px;
+            height: 500px;
+            background: #1a1a22;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        #canvas img.base-product {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            pointer-events: none;
+            user-select: none;
+        }
+        .placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #555;
+        }
+        .sidebar {
+            width: 260px;
+        }
+        .sidebar h3 {
+            margin-top: 0;
+        }
+        .sidebar p {
+            color: #9a9aa5;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+    <a href="{% url 'product_detail' product.id %}" class="back">&larr; Back to {{ product.name }}</a>
+    <h1>Customize: {{ product.name }}</h1>
+    <div class="layout">
+        <div id="canvas">
+            {% if product.image %}
+                <img class="base-product" src="{{ product.image.url }}" alt="{{ product.name }}">
+            {% else %}
+                <div class="placeholder">No product image</div>
+            {% endif %}
+        </div>
+        <div class="sidebar">
+            <h3>Design tools</h3>
+            <p>Upload, move, and resize your design here. Coming in the next steps.</p>
+        </div>
+    </div>
+</body>
+</html>

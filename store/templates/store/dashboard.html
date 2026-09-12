@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard — 0vibe</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: -apple-system, Segoe UI, Roboto, sans-serif;
+            background: #0f0f14;
+            color: #f2f2f5;
+            padding: 2rem;
+        }
+        h1 {
+            font-size: 1.8rem;
+        }
+        a {
+            color: #6c5ce7;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    {% include 'store/nav.html' %}
+    <h1>Welcome, {{ request.user.email }} 👋</h1>
+    <p>This is your dashboard. We'll build products and customization tools here soon.</p>
+    <a href="{% url 'logout' %}">Log out</a>
+</body>
+</html>

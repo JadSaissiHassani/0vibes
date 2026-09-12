@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ product.name }} — 0vibe</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: -apple-system, Segoe UI, Roboto, sans-serif;
+            background: #0f0f14;
+            color: #f2f2f5;
+            padding: 2rem;
+        }
+        a.back {
+            color: #6c5ce7;
+            text-decoration: none;
+        }
+        .layout {
+            display: flex;
+            gap: 2.5rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+        .image-box {
+            width: 320px;
+            height: 320px;
+            background: #1a1a22;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        .image-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .placeholder {
+            color: #555;
+        }
+        .info h1 {
+            margin: 0 0 0.5rem 0;
+        }
+        .info .category {
+            color: #9a9aa5;
+            margin-bottom: 1rem;
+        }
+        .price {
+            font-size: 1.4rem;
+            color: #6c5ce7;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+        .description {
+            color: #d0d0d5;
+            max-width: 400px;
+            line-height: 1.5;
+            margin-bottom: 2rem;
+        }
+        button {
+            padding: 0.85rem 1.75rem;
+            border-radius: 8px;
+            border: none;
+            background: #6c5ce7;
+            color: white;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #5a4bd1;
+        }
+    </style>
+</head>
+<body>
+    {% include 'store/nav.html' %}
+    <a href="{% url 'products' %}" class="back">&larr; Back to products</a>
+    <div class="layout">
+        <div class="image-box">
+            {% if product.image %}
+                <img src="{{ product.image.url }}" alt="{{ product.name }}">
+            {% else %}
+                <span class="placeholder">No image</span>
+            {% endif %}
+        </div>
+        <div class="info">
+            <h1>{{ product.name }}</h1>
+            <div class="category">{{ product.category }}</div>
+            <div class="price">${{ product.base_price }}</div>
+            <div class="description">{{ product.description }}</div>
+            <a href="{% url 'customizer' product.id %}" style="text-decoration: none;">
+    <button>Customize</button>
+</a>
+        </div>
+    </div>
+</body>
+</html>
