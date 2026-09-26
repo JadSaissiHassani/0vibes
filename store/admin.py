@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from .models import CustomUser, Product, DevlogEntry
+from .models import CustomUser, Product, DevlogEntry, ProductVariant
 
 
 class CustomUserAdmin(UserAdmin):
@@ -18,7 +18,15 @@ class CustomUserAdmin(UserAdmin):
         }),
     )
     search_fields = ('email',)
+class ProductVariantInline(admin.TabularInline):
+    model = ProductVariant
+    extra = 1
 
 
-admin.site.register(Product)
+class ProductAdmin(admin.ModelAdmin):
+    inlines = [ProductVariantInline]
+    list_display = ('name', 'base_price', 'category')
+
+
+admin.site.register(Product, ProductAdmin)
 admin.site.register(DevlogEntry)

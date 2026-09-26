@@ -52,3 +52,15 @@ class DevlogEntry(models.Model):
 
     class Meta:
         ordering = ['-created_at']
+class ProductVariant(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='variants')
+    color = models.CharField(max_length=50, blank=True)
+    size = models.CharField(max_length=20, blank=True)
+    in_stock = models.BooleanField(default=True)
+    stock_quantity = models.PositiveIntegerField(default=0)
+
+    def __str__(self):
+        return f"{self.product.name} - {self.color} / {self.size}"
+
+    class Meta:
+        unique_together = ('product', 'color', 'size')
